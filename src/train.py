@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 
 from model import pyramidnet
 import argparse
+from tqdm import tqdm
 # from tensorboardX import SummaryWriter
 
 
@@ -77,7 +78,10 @@ def train(net, criterion, optimizer, train_loader, device):
     total = 0
     
     epoch_start = time.time()
+    tbar = tqdm(desc="Training ")
+    round = 0
     while True:
+        round += 1
         for batch_idx, (inputs, targets) in enumerate(train_loader):
             start = time.time()
 
@@ -99,9 +103,14 @@ def train(net, criterion, optimizer, train_loader, device):
 
             batch_time = time.time() - start
 
-            if batch_idx % 20 == 0:
-                print('Epoch: [{}/{}]| loss: {:.3f} | acc: {:.3f} | batch time: {:.3f}s '.format(
-                    batch_idx, len(train_loader), train_loss/(batch_idx+1), acc, batch_time))
+            tbar.update()
+            if batch_idx % 10 == 0:
+                tbar.set_postfix({'Round/Epoch' : ' [{}/{}]'.format(round, batch_idx), 
+                                  'loss' : '{:.3f}'.format(train_loss/(batch_idx+1)), 
+                                  'acc' : '{:.3f}'.format(acc),
+                                  'batch_time' : '{:.3f}s'.format(batch_time})
+                # print('Epoch: [{}/{}]| loss: {:.3f} | acc: {:.3f} | batch time: {:.3f}s '.format(
+                #     batch_idx, len(train_loader), train_loss/(batch_idx+1), acc, batch_time))
     elapse_time = time.time() - epoch_start
     elapse_time = datetime.timedelta(seconds=elapse_time)
     print("Training time {}".format(elapse_time))
