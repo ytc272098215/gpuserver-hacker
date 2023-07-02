@@ -108,7 +108,7 @@ def train(net, criterion, optimizer, train_loader, device):
                 tbar.set_postfix({'Round/Epoch' : ' [{}/{}]'.format(round, batch_idx), 
                                   'loss' : '{:.3f}'.format(train_loss/(batch_idx+1)), 
                                   'acc' : '{:.3f}'.format(acc),
-                                  'batch_time' : '{:.3f}s'.format(batch_time})
+                                  'batch_time' : '{:.3f}s'.format(batch_time) })
                 # print('Epoch: [{}/{}]| loss: {:.3f} | acc: {:.3f} | batch time: {:.3f}s '.format(
                 #     batch_idx, len(train_loader), train_loss/(batch_idx+1), acc, batch_time))
     elapse_time = time.time() - epoch_start
