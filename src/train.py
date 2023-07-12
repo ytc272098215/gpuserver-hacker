@@ -105,7 +105,7 @@ def train(net, criterion, optimizer, train_loader, device):
 
             tbar.update()
             if batch_idx % 10 == 0:
-                tbar.set_postfix({'Round/Epoch' : ' [{}/{}]'.format(round, batch_idx), 
+                tbar.set_postfix({'Round-Epoch' : ' [{}-{}]'.format(round, batch_idx), 
                                   'loss' : '{:.3f}'.format(train_loss/(batch_idx+1)), 
                                   'acc' : '{:.3f}'.format(acc),
                                   'batch_time' : '{:.3f}s'.format(batch_time) })
