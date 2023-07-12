@@ -78,7 +78,7 @@ def train(net, criterion, optimizer, train_loader, device):
     total = 0
     
     epoch_start = time.time()
-    tbar = tqdm(desc="Training ")
+    tbar = tqdm(desc="\033[94mTraining\033[00m ",)
     round = 0
     while True:
         round += 1
@@ -105,10 +105,10 @@ def train(net, criterion, optimizer, train_loader, device):
 
             tbar.update()
             if batch_idx % 10 == 0:
-                tbar.set_postfix({'Round-Epoch' : ' [{}-{}]'.format(round, batch_idx), 
-                                  'loss' : '{:.3f}'.format(train_loss/(batch_idx+1)), 
-                                  'acc' : '{:.3f}'.format(acc),
-                                  'batch_time' : '{:.3f}s'.format(batch_time) })
+                tbar.set_postfix({'\033[94mRound-Epoch\033[00m' : '\033[94m[{}-{}]\033[00m'.format(round, batch_idx), 
+                                  '\033[94mloss\033[00m' : '\033[94m{:.3f}\033[00m'.format(train_loss/(batch_idx+1)), 
+                                  '\033[94macc\033[00m' : '\033[94m{:.3f}\033[00m'.format(acc),
+                                  '\033[94mbatch_time\033[00m' : '\033[94m{:.3f}s\033[00m'.format(batch_time) })
                 # print('Epoch: [{}/{}]| loss: {:.3f} | acc: {:.3f} | batch time: {:.3f}s '.format(
                 #     batch_idx, len(train_loader), train_loss/(batch_idx+1), acc, batch_time))
     elapse_time = time.time() - epoch_start
